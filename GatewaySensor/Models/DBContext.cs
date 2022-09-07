@@ -121,6 +121,15 @@ namespace GatewaySensor.Models
 
     }
 
+    public class PalletsEnBodegaModel
+    {
+        public string Centro { get; set; }
+        public string Bodega { get; set; }
+        public int Pallets { get; set; }
+
+
+    }
+
     public class DBContext : DbContext
     {
 

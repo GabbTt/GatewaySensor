@@ -195,6 +195,37 @@ namespace GatewaySensor.Controllers
 
         }
 
+        [HttpGet]
+        [Route("api/PalletsEnBodega/")]
+        public List<PalletsEnBodegaModel> PalletsEnBodega()
+        {
+            List<PalletsEnBodegaModel> localizarPAlletsActivos = new List<PalletsEnBodegaModel>();
+            SqlConnection conn = new SqlConnection(dbConnection);
+            conn.Open();
+
+            SqlCommand command = new SqlCommand("select Centro, Bodega, Count(bodega) Pallets from LocalizarPalletsActivos group by Centro, Bodega", conn);
+
+            // int result = command.ExecuteNonQuery();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    localizarPAlletsActivos.Add(new PalletsEnBodegaModel
+                    {
+                        Centro = Convert.ToString(reader.GetValue(0)),
+                        Bodega= Convert.ToString(reader.GetValue(1)),
+                        Pallets = Convert.ToInt32(reader.GetValue(2))
+                    });
+                }
+
+            }
+
+            conn.Close();
+            return localizarPAlletsActivos;
+
+        }
+
 
         [HttpDelete]
         [Route("api/gateways/{gmac}")]

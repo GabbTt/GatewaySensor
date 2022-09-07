@@ -31,6 +31,7 @@ namespace GatewaySensor.Models
         public string Rssi { get; set; }
         public string Vbatt { get; set; }
         public string Temp { get; set; }
+        public string Humidty { get; set; }
         public string X0 { get; set; }
         public string Y0 { get; set; }
         public string Z0 { get; set; }

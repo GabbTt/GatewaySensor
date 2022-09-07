@@ -143,9 +143,10 @@ namespace GatewaySensor.Controllers
                         Rssi = Convert.ToString(reader.GetValue(4)),
                         Vbatt = Convert.ToString(reader.GetValue(5)),
                         Temp = Convert.ToString(reader.GetValue(6)),
-                        X0 = Convert.ToString(reader.GetValue(7)),
-                        Y0= Convert.ToString(reader.GetValue(8)),
-                        Z0= Convert.ToString(reader.GetValue(9))
+                        Humidty = Convert.ToString(reader.GetValue(7)),
+                        X0 = Convert.ToString(reader.GetValue(8)),
+                        Y0= Convert.ToString(reader.GetValue(9)),
+                        Z0= Convert.ToString(reader.GetValue(10))
                         
                     });
                 }
@@ -299,7 +300,7 @@ namespace GatewaySensor.Controllers
             logger.Info("Recibido desde APP" + JsonConvert.SerializeObject(RegistroPalletSensor));
             using (var db = new DBContext())
             {
-                //Agregamos el json al contexto BeaconContext para guardar en la base
+                //Agregamos el json al contexto BeaconContext para guardar en la ListaSensoresVisibles
                 //usando entity framework
                 db.RegistroPalletSensor.Add(RegistroPalletSensor);
                 db.SaveChanges();
